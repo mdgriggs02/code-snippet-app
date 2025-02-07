@@ -1,0 +1,29 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div class="search-container">
+    <form method="GET" action="{{ url_for('main.snippets') }}">
+        <input type="text" name="search" placeholder="Search snippets..." value="{{ request.args.get('search', '') }}">
+        <button type="submit">Search</button>
+    </form>
+</div>
+
+<div class="snippets-container">
+    {% for snippet in snippets %}
+    <div class="snippet-card">
+        <h3>{{ snippet.title }}</h3>
+        <div class="snippet-meta">
+            <span>Language: {{ snippet.language }}</span>
+            <span>Created: {{ snippet.timestamp.strftime('%Y-%m-%d') }}</span>
+        </div>
+        <p>{{ snippet.description }}</p>
+        <pre><code class="language-{{ snippet.language }}">{{ snippet.code }}</code></pre>
+        <div class="tags">
+            {% for tag in snippet.tags.split(',') %}
+            <a href="{{ url_for('main.snippets', tag=tag.strip()) }}" class="tag">{{ tag.strip() }}</a>
+            {% endfor %}
+        </div>
+    </div>
+    {% endfor %}
+</div>
+{% endblock %}

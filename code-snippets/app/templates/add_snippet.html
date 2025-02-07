@@ -1,0 +1,30 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div class="form-container">
+    <h2>Add New Snippet</h2>
+    <form method="POST" action="{{ url_for('main.add_snippet') }}">
+        <div class="form-group">
+            <label for="title">Title</label>
+            <input type="text" id="title" name="title" required>
+        </div>
+        <div class="form-group">
+            <label for="language">Language</label>
+            <input type="text" id="language" name="language" required>
+        </div>
+        <div class="form-group">
+            <label for="description">Description</label>
+            <textarea id="description" name="description" rows="3"></textarea>
+        </div>
+        <div class="form-group">
+            <label for="code">Code</label>
+            <textarea id="code" name="code" rows="10" required></textarea>
+        </div>
+        <div class="form-group">
+            <label for="tags">Tags (comma-separated)</label>
+            <input type="text" id="tags" name="tags">
+        </div>
+        <button type="submit">Save Snippet</button>
+    </form>
+</div>
+{% endblock %}
